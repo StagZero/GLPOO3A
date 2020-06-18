@@ -1,5 +1,6 @@
 from model.database import DatabaseEngine
 from controller.Bras_controller import BrasController
+from controller.Moteur_controller import MoteurController
 
 def main():
     print("Bienvenue dans le Createur de Robot")
@@ -10,6 +11,11 @@ def main():
 
     # controller
     Bras_controller = BrasController(database_engine)
+    Moteur_controller = MoteurController(database_engine)
+    
+    # start
+    root.mainloop()
+
 
 if __name__ == "__main__":
     main()
