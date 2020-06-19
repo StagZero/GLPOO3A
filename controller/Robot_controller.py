@@ -2,6 +2,7 @@ import re
 
 from model.dao.Robot_dao import RobotDAO
 from exceptions import Error, InvalidData
+from controller.Microcontroleur_controller import MicrocontroleurController as MC
 
 
 class RobotController:
@@ -60,3 +61,9 @@ class RobotController:
             Robot_dao = RobotDAO(session)
             Robot = Robot_dao.get_by_Nom(R_Nom)
             return Robot.to_dict()
+        
+    def start(self, R_id):
+        with self._database_engine.new_session() as session:
+            R = self.get_Robot(R_id)
+            MCC = MC(self._database_engine)
+            MC.start(MCC,R['MC_ID'])

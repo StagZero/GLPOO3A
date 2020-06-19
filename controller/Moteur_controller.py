@@ -62,21 +62,18 @@ class MoteurController:
             return Moteur.to_dict()
 
     def droite(self, M_id):
-        with self._database_engine.new_session() as session:
-            Moteur = MoteurDAO(session).get(M_id)
+        Moteur = self.get_Moteur(M_id)
         messagebox.showinfo("Success",
                             "Le moteur %s à démarré, le robot se deplace vers la droite" % Moteur['M_NumSerie'])
        
         
     def gauche(self, M_id):
-        with self._database_engine.new_session() as session:
-            Moteur = MoteurDAO(session).get(M_id)
+        Moteur = self.get_Moteur(M_id)
         messagebox.showinfo("Success",
                             "Le moteur %s à démarré, le robot se déplace vers la gauche" % Moteur['M_NumSerie'])
         
     def arreter(self, M_id):
-        with self._database_engine.new_session() as session:
-            Moteur = MoteurDAO(session).get(M_id)
+        Moteur = self.get_Moteur(M_id)
         messagebox.showinfo("Success",
                             "Le moteur %s s'arrete" % Moteur['M_NumSerie'])
         

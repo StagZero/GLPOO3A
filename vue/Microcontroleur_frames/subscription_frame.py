@@ -28,7 +28,7 @@ class SubscriptionMicrocontroleurFrame(BaseFrame):
 
         self.MC_NumSerie_entry = self.create_entry("MC_NumSerie", row=0)
         self.MC_Modele_entry = self.create_entry("MC_Modele", row=1)
-        self.MC_Etat_entry = self.create_entry("MC_Etat", row=2)
+        self.MC_Etat_entry = self.create_entry("MC_Etat", text='S', row=2, disabled=True, columnspan=3)
         NON = Label(self,text="M_ID")
         NON.grid(row=3)
         self._Moteurs = self._Moteur_controller.list_Moteur()
