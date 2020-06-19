@@ -53,7 +53,7 @@ class BrasController:
             Bras_dao = BrasDAO(session)
             Bras = Bras_dao.get(Bras_id)
             Bras_dao.delete(Bras)
-    
+
     def search_Bras(self, B_NumSerie):
 
         # Query database
@@ -63,15 +63,11 @@ class BrasController:
             return Bras.to_dict()
 
     def serrer(self, B_id):
-        with self._database_engine.new_session() as session:
-            Bras = BrasDAO(session).get(B_id)
+        Bras = self.get_Bras(B_id)
         messagebox.showinfo("Success",
                             "Le Bras %s a commencé son serrage" % Bras['B_NumSerie'])
-        
+
     def lacher(self ,B_id):
-        with self._database_engine.new_session() as session:
-            Bras = BrasDAO(session).get(B_id)
+        Bras = self.get_Bras(B_id)
         messagebox.showinfo("Success",
                             "Le Bras %s a commencé à lacher" % Bras['B_NumSerie'])
-        
-        

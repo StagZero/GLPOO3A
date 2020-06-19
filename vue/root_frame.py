@@ -111,7 +111,7 @@ class RootFrame(Frame):
     def show_subscribe_Robot(self):
         self.hide_menu()
         # Afficher le formulaire d'ajout
-        subscribe_bras_frame = SubscriptionRobotFrame(self._Robot_controller, self)
+        subscribe_bras_frame = SubscriptionRobotFrame(self._Robot_controller,self._Microcontroleur_controller, self)
         subscribe_bras_frame.show()
         self._frames.append(subscribe_bras_frame)
 
@@ -119,7 +119,7 @@ class RootFrame(Frame):
 
         # show Robot
         self.hide_menu()
-        list_robot_frame = ListRobotFrame(self._Robot_controller, self)
+        list_robot_frame = ListRobotFrame(self._Robot_controller,self._Microcontroleur_controller, self)
         self._frames.append(list_robot_frame)
         list_robot_frame.show()
 
