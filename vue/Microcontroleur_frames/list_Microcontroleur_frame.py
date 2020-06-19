@@ -19,7 +19,7 @@ class ListMicrocontroleurFrame(BaseFrame):
 
         #grille
         yDefil = Scrollbar(self, orient='vertical')
-        self.listbox = Listbox(self, yscrollcommand=yDefil.set, width=30, selectmode='single')
+        self.listbox = Listbox(self, yscrollcommand=yDefil.set, width=40, selectmode='single')
         yDefil['command'] = self.listbox.yview
         self.listbox.bind('<<ListboxSelect>>', self.onselect)
         yDefil.grid(row=1, column=1, sticky='ns')
