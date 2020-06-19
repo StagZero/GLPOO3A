@@ -5,10 +5,11 @@ from vue.base_frame import BaseFrame
 
 class ProfileRobotFrame(BaseFrame):
 
-    def __init__(self, Robot_controller, Robot, master=None):
+    def __init__(self, Robot_controller, Robot, Microcontroleur_controller, master=None):
         super().__init__(master)
         self._Robot = Robot
         self._Robot_controller = Robot_controller
+        self._Microcontroleur_controller = Microcontroleur_controller
         self._create_widgets()
 
     def _create_widgets(self):
@@ -64,6 +65,7 @@ class ProfileRobotFrame(BaseFrame):
         Robot_id = self._Robot['id']
         self._Robot_controller.delete_Robot(Robot_id)
         # afficher la confirmation
+        MC = self._Microcontroleur_controller.get_Microcontroleur(self._Robot['MC_ID'])
         messagebox.showinfo("Success",
-                            "Robot %s %s deleted !" % (self._Robot['R_Nom'], self._Robot['MC_ID']))
+                            "Robot %s %s deleted !" % (self._Robot['R_Nom'], MC['MC_NumSerie']))
         self.back()
