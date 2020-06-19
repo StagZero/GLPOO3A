@@ -1,5 +1,5 @@
 import re
-
+from tkinter import messagebox
 from model.dao.Bras_dao import BrasDAO
 from exceptions import Error, InvalidData
 
@@ -53,6 +53,7 @@ class BrasController:
             Bras_dao = BrasDAO(session)
             Bras = Bras_dao.get(Bras_id)
             Bras_dao.delete(Bras)
+    
     def search_Bras(self, B_NumSerie):
 
         # Query database
@@ -60,3 +61,17 @@ class BrasController:
             Bras_dao = BrasDAO(session)
             Bras = Bras_dao.get_by_NumSerie(B_NumSerie)
             return Bras.to_dict()
+
+    def serrer(self, B_id):
+        with self._database_engine.new_session() as session:
+            Bras = BrasDAO(session).get(B_id)
+        messagebox.showinfo("Success",
+                            "Le Bras %s a commencé son serrage" % Bras['B_NumSerie'])
+        
+    def lacher(self ,B_id):
+        with self._database_engine.new_session() as session:
+            Bras = BrasDAO(session).get(B_id)
+        messagebox.showinfo("Success",
+                            "Le Bras %s a commencé à lacher" % Bras['B_NumSerie'])
+        
+        
