@@ -1,7 +1,7 @@
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from sqlalchemy.orm.exc import NoResultFound
 
-from model.mapping.member import Member
+from model.mapping.Bras import Bras
 from model.dao.dao import DAO
 
 from exceptions import Error, ResourceNotFound
@@ -16,7 +16,7 @@ class BrasDAO(DAO):
 
     def get(self, id):
         try:
-            return self.__data_session.query(Bras).filter_by(id=id).order_by(Bras.B_NumSerie).one()
+            return self._database_session.query(Bras).filter_by(id=id).order_by(Bras.B_NumSerie).one()
         except NoResultFound:
             raise ResourceNotFound()
 
@@ -34,12 +34,12 @@ class BrasDAO(DAO):
 
     def create(self, data: dict):
         try:
-            Bras = Bras(B_NumSerie=data.get('B_NumSerie'),B_Modele=data.get('B_Modele'))
-            self._database_session.add(Bras)
+            bras = Bras(B_NumSerie=data['B_NumSerie'],B_Modele=data['B_Modele'])
+            self._database_session.add(bras)
             self._database_session.flush()
         except IntegrityError:
             raise Error("Ce Bras est Déjà dans la Base")
-        return Bras
+        return bras
 
     def update(self, Bras: Bras, data: dict):
         if 'B_NumSerie' in data:
