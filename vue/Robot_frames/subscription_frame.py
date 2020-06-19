@@ -43,8 +43,9 @@ class SubscriptionRobotFrame(BaseFrame):
         data = dict(R_Nom=self.R_Nom_entry.get(), MC_ID=self._MC['id'])
         try:
             Robot_data = self._Robot_controller.create_Robot(data)
+            MC = self._Microcontroleur_controller.get_Microcontroleur(Robot_data['MC_ID'])
             messagebox.showinfo("Success",
-                                "Robot %s %s created !" % (Robot_data['R_Nom'], Robot_data['MC_ID']))
+                                "Robot %s %s created !" % (Robot_data['R_Nom'], MC['MC_NumSerie']))
 
         except Error as e:
             messagebox.showerror("Error", str(e))

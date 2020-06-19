@@ -127,7 +127,7 @@ class RootFrame(Frame):
         Robot_data = self._Robot_controller.get_Robot(Robot_id)
 
         self.hide_frames()
-        profile_robot_frame = ProfileRobotFrame(self._Robot_controller, Robot_data, self)
+        profile_robot_frame = ProfileRobotFrame(self._Robot_controller, Robot_data,self._Microcontroleur_controller, self)
         self._frames.append(profile_robot_frame)
         profile_robot_frame.show()
 
