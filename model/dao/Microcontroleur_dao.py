@@ -1,7 +1,7 @@
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from sqlalchemy.orm.exc import NoResultFound
 
-from model.mapping.member import Member
+from model.mapping.Microcontroleur import Microcontroleur
 from model.dao.dao import DAO
 
 from exceptions import Error, ResourceNotFound
@@ -16,7 +16,7 @@ class MicrocontroleurDAO(DAO):
 
     def get(self, id):
         try:
-            return self.__data_session.query(Microcontroleur).filter_by(id=id).order_by(Microcontroleur.MC_NumSerie).one()
+            return self._database_session.query(Microcontroleur).filter_by(id=id).order_by(Microcontroleur.MC_NumSerie).one()
         except NoResultFound:
             raise ResourceNotFound()
 
@@ -47,12 +47,12 @@ class MicrocontroleurDAO(DAO):
 
     def create(self, data: dict):
         try:
-            Microcontroleur = Microcontroleur(B_ID=data.get('B_ID'), M_ID=data.get('M_ID'),MC_NumSerie=data.get('MC_NumSerie'),MC_Modele=data.get('MC_Modele'),M_Etat=data.get('M_Etat'))
-            self._database_session.add(Microcontroleur)
+            microcontroleur = Microcontroleur(M_ID=data['M_ID'], B_ID=data['B_ID'], MC_NumSerie=data['MC_NumSerie'], MC_Modele=data['MC_Modele'], MC_Etat=data['MC_Etat'])
+            self._database_session.add(microcontroleur)
             self._database_session.flush()
         except IntegrityError:
             raise Error("Ce µcontroleur est Déjà dans la Base")
-        return Microcontroleur
+        return microcontroleur
 
     def update(self, Microcontroleur: Microcontroleur, data: dict):
         if 'MC_NumSerie' in data:
@@ -64,7 +64,7 @@ class MicrocontroleurDAO(DAO):
         if 'B_ID' in data:
             Microcontroleur.B_ID = data['B_ID']
         if 'M_ID' in data:
-            Microcontroleur.M_ID = data['M_ID   ']
+            Microcontroleur.M_ID = data['M_ID']
         try:
             self._database_session.merge(Microcontroleur)
             self._database_session.flush()

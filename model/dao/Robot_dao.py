@@ -1,7 +1,7 @@
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from sqlalchemy.orm.exc import NoResultFound
 
-from model.mapping.member import Member
+from model.mapping.Robot import Robot
 from model.dao.dao import DAO
 
 from exceptions import Error, ResourceNotFound
@@ -16,7 +16,7 @@ class RobotDAO(DAO):
 
     def get(self, id):
         try:
-            return self.__data_session.query(Robot).filter_by(id=id).order_by(Robot.R_Nom).one()
+            return self._database_session.query(Robot).filter_by(id=id).order_by(Robot.R_Nom).one()
         except NoResultFound:
             raise ResourceNotFound()
 
@@ -40,18 +40,18 @@ class RobotDAO(DAO):
 
     def create(self, data: dict):
         try:
-            Robot = Robot(R_Nom=data.get('R_Nom'),MC_ID=data.get('MC_ID'))
-            self._database_session.add(Robot)
+            robot = Robot(MC_ID=data['MC_ID'],R_Nom=data['R_Nom'])
+            self._database_session.add(robot)
             self._database_session.flush()
         except IntegrityError:
             raise Error("Ce Robot est Déjà dans la Base")
-        return Robot
+        return robot
 
     def update(self, Robot: Robot, data: dict):
         if 'R_Nom' in data:
             Robot.R_Nom = data['R_Nom']
         if 'MC_ID' in data:
-            RObot.MC_ID = data['MC_ID']
+            Robot.MC_ID = data['MC_ID']
         try:
             self._database_session.merge(Robot)
             self._database_session.flush()
