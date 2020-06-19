@@ -1,7 +1,7 @@
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from sqlalchemy.orm.exc import NoResultFound
 
-from model.mapping.member import Member
+from model.mapping.Moteur import Moteur
 from model.dao.dao import DAO
 
 from exceptions import Error, ResourceNotFound
@@ -16,7 +16,7 @@ class MoteurDAO(DAO):
 
     def get(self, id):
         try:
-            return self.__data_session.query(Moteur).filter_by(id=id).order_by(Moteur.M_NumSerie).one()
+            return self._database_session.query(Moteur).filter_by(id=id).order_by(Moteur.M_NumSerie).one()
         except NoResultFound:
             raise ResourceNotFound()
 
@@ -34,12 +34,12 @@ class MoteurDAO(DAO):
 
     def create(self, data: dict):
         try:
-            Moteur = Moteur(M_NumSerie=data.get('M_NumSerie'),M_Modele=data.get('M_Modele'))
-            self._database_session.add(Moteur)
+            moteur = Moteur(M_NumSerie=data['M_NumSerie'],M_Modele=data['M_Modele'])
+            self._database_session.add(moteur)
             self._database_session.flush()
         except IntegrityError:
             raise Error("Ce Moteur est Déjà dans la Base")
-        return Moteur
+        return moteur
 
     def update(self, Moteur: Moteur, data: dict):
         if 'M_NumSerie' in data:
