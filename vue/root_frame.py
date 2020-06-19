@@ -87,7 +87,7 @@ class RootFrame(Frame):
     def show_subscribe_Microcontroleur(self):
         self.hide_menu()
         # Afficher le formulaire d'ajout
-        subscribe_microcontroleur_frame = SubscriptionMicrocontroleurFrame(self._Microcontroleur_controller, self)
+        subscribe_microcontroleur_frame = SubscriptionMicrocontroleurFrame(self._Microcontroleur_controller, self._Bras_controller,self._Moteur_controller, self)
         subscribe_microcontroleur_frame.show()
         self._frames.append(subscribe_microcontroleur_frame)
 
@@ -95,7 +95,7 @@ class RootFrame(Frame):
 
         # show Microcontroleur
         self.hide_menu()
-        list_microcontroleur_frame = ListMicrocontroleurFrame(self._Microcontroleur_controller, self)
+        list_microcontroleur_frame = ListMicrocontroleurFrame(self._Microcontroleur_controller,self._Bras_controller,self._Moteur_controller, self)
         self._frames.append(list_microcontroleur_frame)
         list_microcontroleur_frame.show()
 

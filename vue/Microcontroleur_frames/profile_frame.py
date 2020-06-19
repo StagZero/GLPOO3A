@@ -1,6 +1,14 @@
 from tkinter import *
 from tkinter import messagebox
 from vue.base_frame import BaseFrame
+from vue.Bras_menu_frame import BrasMenuFrame
+from vue.Bras_frames.subscription_frame import SubscriptionBrasFrame
+from vue.Bras_frames.list_Bras_frame import ListBrasFrame
+from vue.Bras_frames.profile_frame import ProfileBrasFrame
+from vue.Moteur_menu_frame import MoteurMenuFrame
+from vue.Moteur_frames.subscription_frame import SubscriptionMoteurFrame
+from vue.Moteur_frames.list_Moteur_frame import ListMoteurFrame
+from vue.Moteur_frames.profile_frame import ProfileMoteurFrame
 
 
 class ProfileMicrocontroleurFrame(BaseFrame):
@@ -37,6 +45,8 @@ class ProfileMicrocontroleurFrame(BaseFrame):
         self.return_button.grid(row=6,column=0)
         self.edit_button.grid(row=6,column=1, sticky="nsew")
         self.remove_button.grid(row=6,column=2, sticky="nsew")
+        #Liste des Id Bouton
+
 
     def edit(self):
         self.edit_button.grid_forget()
