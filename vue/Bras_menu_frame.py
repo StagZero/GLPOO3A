@@ -11,9 +11,8 @@ class BrasMenuFrame(BaseFrame):
         self.title = Label(self, text="Bienvenue dans le createur de Bras")
         self.subscribe = Button(self, text="Ajouter un bras", width=30, command=self._root_frame.show_subscribe_Bras)
         self.list = Button(self, text="Liste des Bras", width=30, command=self._root_frame.show_Brass)
-        self.quit = Button(self, text="QUIT", fg="red", width=30,
-                           command=self.quit)
+        
         self.title.pack(side="top")
         self.subscribe.pack()
         self.list.pack()
-        self.quit.pack(side="bottom")
+        
