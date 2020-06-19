@@ -87,7 +87,7 @@ class RootFrame(Frame):
     def show_subscribe_Microcontroleur(self):
         self.hide_menu()
         # Afficher le formulaire d'ajout
-        subscribe_microcontroleur_frame = SubscriptionMicrocontroleurFrame(self._Microcontroleur_controller, self)
+        subscribe_microcontroleur_frame = SubscriptionMicrocontroleurFrame(self._Microcontroleur_controller, self._Bras_controller,self._Moteur_controller, self)
         subscribe_microcontroleur_frame.show()
         self._frames.append(subscribe_microcontroleur_frame)
 
@@ -95,7 +95,7 @@ class RootFrame(Frame):
 
         # show Microcontroleur
         self.hide_menu()
-        list_microcontroleur_frame = ListMicrocontroleurFrame(self._Microcontroleur_controller, self)
+        list_microcontroleur_frame = ListMicrocontroleurFrame(self._Microcontroleur_controller,self._Bras_controller,self._Moteur_controller, self)
         self._frames.append(list_microcontroleur_frame)
         list_microcontroleur_frame.show()
 
@@ -111,7 +111,7 @@ class RootFrame(Frame):
     def show_subscribe_Robot(self):
         self.hide_menu()
         # Afficher le formulaire d'ajout
-        subscribe_bras_frame = SubscriptionRobotFrame(self._Robot_controller, self)
+        subscribe_bras_frame = SubscriptionRobotFrame(self._Robot_controller,self._Microcontroleur_controller, self)
         subscribe_bras_frame.show()
         self._frames.append(subscribe_bras_frame)
 
@@ -119,7 +119,7 @@ class RootFrame(Frame):
 
         # show Robot
         self.hide_menu()
-        list_robot_frame = ListRobotFrame(self._Robot_controller, self)
+        list_robot_frame = ListRobotFrame(self._Robot_controller,self._Microcontroleur_controller, self)
         self._frames.append(list_robot_frame)
         list_robot_frame.show()
 
@@ -127,7 +127,7 @@ class RootFrame(Frame):
         Robot_data = self._Robot_controller.get_Robot(Robot_id)
 
         self.hide_frames()
-        profile_robot_frame = ProfileRobotFrame(self._Robot_controller, Robot_data, self)
+        profile_robot_frame = ProfileRobotFrame(self._Robot_controller, Robot_data,self._Microcontroleur_controller, self)
         self._frames.append(profile_robot_frame)
         profile_robot_frame.show()
 

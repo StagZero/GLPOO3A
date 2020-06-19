@@ -2,15 +2,21 @@
 from tkinter import *
 
 from vue.base_frame import BaseFrame
+from controller.Bras_controller import BrasController as B
+from controller.Moteur_controller import MoteurController as M
 
 
 class ListMicrocontroleurFrame(BaseFrame):
 
-    def __init__(self, Microcontroleur_controller, root_frame):
+    def __init__(self, Microcontroleur_controller, Bras_controller, Moteur_controller, root_frame):
         super().__init__(root_frame)
         self._Microcontroleur_controller = Microcontroleur_controller
+        self._Bras_controller = Bras_controller
+        self._Moteur_controller = Moteur_controller
         self._create_widgets()
         self._Microcontroleurs = None
+        self._Brass = None
+        self._Moteurs = None
 
     def _create_widgets(self):
 
@@ -19,7 +25,7 @@ class ListMicrocontroleurFrame(BaseFrame):
 
         #grille
         yDefil = Scrollbar(self, orient='vertical')
-        self.listbox = Listbox(self, yscrollcommand=yDefil.set, width=30, selectmode='single')
+        self.listbox = Listbox(self, yscrollcommand=yDefil.set, width=40, selectmode='single')
         yDefil['command'] = self.listbox.yview
         self.listbox.bind('<<ListboxSelect>>', self.onselect)
         yDefil.grid(row=1, column=1, sticky='ns')
@@ -44,6 +50,8 @@ class ListMicrocontroleurFrame(BaseFrame):
         self._Microcontroleurs = self._Microcontroleur_controller.list_Microcontroleur()
         self.listbox.delete(0,END)
         for index, microcontroleur in enumerate(self._Microcontroleurs):
-            text = microcontroleur['MC_NumSerie'].capitalize() + ' ' + microcontroleur['MC_Modele'].capitalize() + ' ' + microcontroleur['MC_Etat'].capitalize() + ' ' + microcontroleur['M_ID'] + ' ' + microcontroleur['B_ID']
+            bras = self._Bras_controller.get_Bras(microcontroleur['B_ID'])
+            moteur = self._Moteur_controller.get_Moteur(microcontroleur['M_ID'])
+            text = microcontroleur['MC_NumSerie'].capitalize() + ' ' + microcontroleur['MC_Modele'].capitalize() + ' ' + microcontroleur['MC_Etat'].capitalize() + ' ' + moteur['M_NumSerie'].capitalize() + ' ' + bras['B_NumSerie'].capitalize()
             self.listbox.insert(index, text)
         super().show()

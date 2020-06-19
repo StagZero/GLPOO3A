@@ -11,9 +11,8 @@ class MoteurMenuFrame(BaseFrame):
         self.title = Label(self, text="Bienvenue dans le createur de Moteur")
         self.subscribe = Button(self, text="Ajouter un moteur", width=30, command=self._root_frame.show_subscribe_Moteur)
         self.list = Button(self, text="Liste des Moteurs", width=30, command=self._root_frame.show_Moteurs)
-        self.quit = Button(self, text="QUIT", fg="red", width=30,
-                           command=self.quit)
+        
         self.title.pack(side="top")
         self.subscribe.pack()
         self.list.pack()
-        self.quit.pack(side="bottom")
+        
